@@ -71,7 +71,7 @@
          */
         const parent = document.querySelector('#menu');
         if (parent) {
-            console.log ("YES");
+            //console.log ("YES");
 
             const li = document.createElement('li');
             li.setAttribute('name', linkText);
@@ -128,8 +128,8 @@
      */
     function getBreadCrumbs() {
 
-        // Query by ID (#)
-        const crumbs = document.querySelectorAll('#breadcrumbs a');
+       // Query by ID (#)
+        const crumbs = document.querySelectorAll('#breadcrumbs li');
         if (crumbs) {
             //console.log ("YES - Bread Crumbs");
 
@@ -138,12 +138,13 @@
 
             // Iterate LIs
             // ignore the first item (0) as it only contains "/"
+            console.log( "Crumb length = ", crumbs.length);
             for (var i=1; i<crumbs.length; i++) {
                 var item = crumbs[i];
-                //console.log (i, item.text);
-                if (i == 1) { tempText = "For Course: " + item.text;}
-                if (i == 2) { tempText += "\n" + item.text;}
-                if (i == 3) { tempText += ": " + item.text;}
+                //console.log (i, item.textContent);
+                if (i == 1) { tempText = "For Course: " + item.textContent;}
+                if (i == 2) { tempText += "\n" + item.textContent;}
+                if (i == 3) { tempText += ": " + item.textContent;}
             }
 
             // Append the URL
