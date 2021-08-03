@@ -10,4 +10,4 @@ To use,
 2.) Then go to the canvas-support-menu page.
 3.) TamperMonkey will detect that you are trying to install this script and open an information panel. 
 4.) Click “Install” to proceed.
-5.) In TamperMonkey for this script, update Settings -> User includes to include the domain name of your Canvas site.
+5.) In TamperMonkey for this script, update "Settings" tab -> "User includes" to include the domain name of your Canvas site.
