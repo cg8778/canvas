@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Support Menu
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  Adds extra option to the Canvas Global Navigation Menu.
 //               Intended as shortcuts for commonly used sites/actions for support staff.
 // @include      https://*.instructure.com/*
@@ -20,6 +20,8 @@
     const prodCourseSite = prodSite + "/accounts/1?";
     const prodPeopleSite = prodSite + "/accounts/1/users";
     const myUniAdminSite = "https://myuni-admin.adelaide.edu.au/search/";
+    const myUniAdminHome = "https://myuni-admin.adelaide.edu.au/studentview";
+    const courseFinderSite = "https://access.adelaide.edu.au/courses/search.asp?";
 
     /*
      * Icons added to the global navigation menu
@@ -36,6 +38,8 @@
     const imageB = "data:image/png;base64,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";
     const imageT = "data:image/png;base64,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";
     const imageTI = "data:image/png;base64,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";
+    const imageF = "data:image/png;base64,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";
+
 
     /*
      * Constants used in the script
@@ -43,6 +47,7 @@
      *
      */
     const usersRegex = new RegExp('^/courses/([0-9]+)/users');
+    const courseRegex = new RegExp('^/courses/([0-9]+)/');
 
     /*
      * The following buttons are to be added to the Main Menu in Canvas
@@ -61,6 +66,7 @@
     addIcon('Beta', getNewURL(betaSite), imageB);
     addIcon('Test', getNewURL(testSite), imageT);
     addIcon('Ticket Info', "", imageTI);
+    addIcon('Course Finder', getCourseFinderURL(courseFinderSite), imageF);
 
 
     /*
@@ -96,7 +102,7 @@
                     // call a function
                     anchor.setAttribute('href', '#');
                     anchor.onclick = function() {
-                         anchor.setAttribute('href', goToMyUniAdminURL(siteURL));
+                        anchor.setAttribute('href', goToMyUniAdminURL(siteURL));
                         // Open in new window
                         anchor.setAttribute('target', '_blank');
                     }
@@ -165,7 +171,7 @@
         const currentURL = window.location.pathname;
 
         // Work out what URL to go to
-      	if( currentURL == "/accounts/1" ){
+        if( currentURL == "/accounts/1" ){
             // General Canvas Courses Page
             siteURL = siteURL.concat("course");
         }
@@ -177,12 +183,15 @@
             // People page within a course
             siteURL = siteURL.concat("user/" + getPeopleID());
         }
-        else {
+        else if (courseRegex.test(currentURL)) {
             // Any other page within a course
             var code = getCourseCode();
             siteURL = siteURL.concat("course/" + code);
         }
-   
+        else {
+            siteURL = myUniAdminHome;
+        }
+
         //console.log(siteURL);
         return siteURL;
     }
@@ -239,6 +248,45 @@
         }
         return(tempText);
     }
+
+    //Need course name, and term to construct URL
+    function getCourseFinderURL(siteURL) {
+
+        //Need to be on the Settings Page to get course details.
+        //Otherwise just go to the default search page.
+        if( ENV.active_context_tab == "settings" ) {
+
+            var resultURL = "";
+
+            //This ENV element is not available on all pages.
+            // var term = ENV.COURSE["long_name"];
+            var term = document.getElementById('course_sis_source_id').value;
+            if (term) {
+                term = term.substring(0, 4);
+                //console.log ("YES - Course Term - ", term);
+            }
+
+            //This ENV element is not available on all pages.
+            //const name = ENV.COURSE["name"];
+            var name = document.getElementById('course_name').value;
+            if (name) {
+                //console.log ("YES - Course Name - ", name);
+            }
+
+            if( term && name ) {
+                // Create the new URL
+                // append ?m=r&title={name}&term=(dddd} to the course finder URL
+                // e.g.   ?m=r&title=Specialised+Programming&term=4120
+                var newURL = siteURL + "?m=r&title=" + name + "&term=" + term;
+                console.log(newURL);
+                resultURL = encodeURI(newURL);
+                console.log(resultURL);
+            }
+            return resultURL;
+        }
+        return siteURL;
+    }
+
 
     /*
      * Copies the text parsed in to the clipboard, via a temporary div element
